@@ -18,10 +18,6 @@ git clone https://github.com/ImSakushi/Speedify.git
 
 ---
 
-## Please note the following limitations of the extension:
-
-- Since the code is injected to make it work, it may not function smoothly.
-
 > [!WARNING]  
 > The user is responsible for any issues arising from the use of this program.  
 > If the program is not working, please refresh the page [F5].

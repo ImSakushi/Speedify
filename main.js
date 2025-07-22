@@ -1,4 +1,4 @@
-let intervalId;
+let currentRate = 1;
 
 const box = () => {
     const playbackDurationElement = document.querySelector('[data-testid="playback-duration"]');
@@ -58,48 +58,43 @@ const box = () => {
         newInput.style.borderColor = 'rgba(31, 31, 31, 0.39)';
     });
 
-    const setPlaybackRate = (rate) => {
+    const applyRate = (rate) => {
+        currentRate = rate;
+        window.__SpeedifyCurrentRate = rate;
+        window.__SpeedifyApplyRate = applyRate;
         videoElements.forEach(video => {
             video.preservesPitch = false;
             video.mozPreservesPitch = false;
             video.webkitPreservesPitch = false;
-            video.playbackRate = rate;
+            if (video.playbackRate !== rate) {
+                video.playbackRate = rate;
+            }
         });
         console.log(`Playback rate set to: ${rate}`);
     };
 
-    const startInterval = (rate) => {
-        if (intervalId) {
-            clearInterval(intervalId);
-            console.log("Previous interval cleared");
-        }
 
-        intervalId = setInterval(() => {
-            setPlaybackRate(rate);
-        }, 200);
-    };
-    
     newInput.addEventListener('input', () => {
         const newRate = parseFloat(newInput.value);
         slider.value = newInput.value;
         if (!isNaN(newRate) && newRate >= newInput.min && newRate <= newInput.max) {
-            startInterval(newRate);
+            applyRate(newRate);
         } else if (newRate < newInput.min) {
             newInput.value = newInput.min;
             slider.value = newInput.min;
-            startInterval(newInput.min);
+            applyRate(newInput.min);
             alert('The value is too small.');
         } else if (newRate > newInput.max) {
             newInput.value = newInput.max;
             slider.value = newInput.max;
-            startInterval(newInput.max);
+            applyRate(newInput.max);
             alert('The value is too large.');
         }
     });
 
     slider.addEventListener('input', () => {
         newInput.value = slider.value;
-        startInterval(parseFloat(slider.value));
+        applyRate(parseFloat(slider.value));
     });
 
     newDiv.appendChild(newInput);

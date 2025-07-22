@@ -2,14 +2,14 @@
   <img src="./img/speedify.png" alt="speedify icon" width="200" />
 </p>
 
-<h1 align="center">speedify</h1>
+<h1 align="center">Speedify</h1>
 
 Speedify is a program that helps users enjoy more exciting songs by adjusting the speed and pitch of the music.
 
 To use the extension, you can either download the folder or clone it using the command. 
 
 ```ps1
-git clone https://github.com/Quema100/Speedify.git
+git clone https://github.com/ImSakushi/Speedify.git
 ```
 
 > [!TIP]   

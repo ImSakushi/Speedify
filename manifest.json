@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Speedify",
-    "description": "extensions by Quema",
+    "description": "Speed up your Spotify experience with Speedify.",
     "version": "1.2.0",
     "icons": {
         "16": "img/Speedify.png",

@@ -22,6 +22,16 @@ const box = () => {
     
     const newInput = document.createElement('input');
 
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.min = 0.1;
+    slider.max = 3;
+    slider.step = 0.1;
+    slider.value = 1;
+
+    slider.style.width = '100px';
+    slider.style.marginLeft = '10px';
+
     newInput.type = 'number';
     newInput.placeholder = 'speed';
     newInput.value = 1;
@@ -71,20 +81,29 @@ const box = () => {
     
     newInput.addEventListener('input', () => {
         const newRate = parseFloat(newInput.value);
+        slider.value = newInput.value;
         if (!isNaN(newRate) && newRate >= newInput.min && newRate <= newInput.max) {
             startInterval(newRate);
         } else if (newRate < newInput.min) {
             newInput.value = newInput.min;
+            slider.value = newInput.min;
             startInterval(newInput.min);
             alert('The value is too small.');
         } else if (newRate > newInput.max) {
             newInput.value = newInput.max;
+            slider.value = newInput.max;
             startInterval(newInput.max);
             alert('The value is too large.');
         }
     });
 
+    slider.addEventListener('input', () => {
+        newInput.value = slider.value;
+        startInterval(parseFloat(slider.value));
+    });
+
     newDiv.appendChild(newInput);
+    newDiv.appendChild(slider);
 
     if (playbackDurationElement) {
         playbackDurationElement.insertAdjacentElement('afterend', newDiv);

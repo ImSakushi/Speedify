@@ -50,6 +50,9 @@ const box = () => {
 
     const setPlaybackRate = (rate) => {
         videoElements.forEach(video => {
+            video.preservesPitch = false;
+            video.mozPreservesPitch = false;
+            video.webkitPreservesPitch = false;
             video.playbackRate = rate;
         });
         console.log(`Playback rate set to: ${rate}`);
